@@ -54,17 +54,24 @@ nav ul li a{
 nav ul li a:hover{
     color: var(--accent);
 }
+
+/* This is to make an animation on hovering over a link */
 nav ul li a:after{
+    /* Empty generated content is added to the css */
     content: "";
     position: absolute;
     left: 0;
     width: 0;
+    /* The empty generated content is made to be 3px tall */
     height: 3px;
+    /* Make the background of the generated content yellow */
     background: var(--accent);
+    /* The time it takes for the animation to play over */
     transition: .3s;
     bottom: 0;
 }
 nav ul li a:hover:after{
+    /* On hover, widen the content */
     width: 100%;
 }
 
