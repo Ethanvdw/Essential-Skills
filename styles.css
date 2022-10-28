@@ -1,62 +1,77 @@
 /* Imports the chosen font through the google API, alongside required weights. */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 /* CSS colour variables */
 :root {
-  --primary: #1d1d24;
-  --accent: #fdeb47;
-  --text: #ffffff;
-  --text-secondary: #000000;
+    --primary: #1d1d24;
+    --accent: #fdeb47;
+    --secondary: #6171ff;
+    --tertiary: #ffffff;
+    --text: #ffffff;
+    --text-secondary: #1d1d24;
 }
 
 /* All elements */
-*{
-  /* Ensures white the web page fills the entire viewport */
+* {
+    /* Ensures white the web page fills the entire viewport */
     margin: 0;
     padding: 0;
     /* Includes the paddng and border in the width and height of elements. */
     box-sizing: border-box;
     /* Sets the default font for the webpage. */
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
+
 /* Links */
-a{
-  /* Removes the underline from */
+a {
+    /* Removes the underline from */
     text-decoration: none;
 }
+
 /* The primary content of the web page. */
-.hero{
-  /*  */
+.hero {
     width: 100%;
     height: 100vh;
     background: url(images/..jpg);
     background-size: cover;
 }
-nav{
+
+nav {
+    /* Spread the nav's content across the page horizontally */
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    /* Ensure there's a small gap between items */
     padding: 30px 100px;
 }
-.logo{
+
+.logo {
+    /* Ensures the logo is always the same size */
     max-height: 60px;
 }
-nav ul li{
+
+nav ul li {
     list-style: none;
     display: inline-block;
     padding: 10px 20px;
 }
-nav ul li a{
+
+nav ul li a {
     color: var(--text);
     position: relative;
     padding: 5px 0;
 }
-nav ul li a:hover{
+
+/* Make the active link coloured */
+nav ul li a.active {
+    color: var(--accent);
+}
+
+nav ul li a:hover {
     color: var(--accent);
 }
 
 /* This is to make an animation on hovering over a link */
-nav ul li a:after{
+nav ul li a:after {
     /* Empty generated content is added to the css */
     content: "";
     position: absolute;
@@ -67,19 +82,20 @@ nav ul li a:after{
     /* Make the background of the generated content yellow */
     background: var(--accent);
     /* The time it takes for the animation to play over */
-    transition: .3s;
+    transition: 0.3s;
     bottom: 0;
 }
-nav ul li a:hover:after{
+
+nav ul li a:hover:after {
     /* On hover, widen the content */
     width: 100%;
 }
 
-body{
+body {
     background: var(--primary);
 }
 
-.btn{
+.btn {
     color: var(--text-secondary);
     font-size: 16px;
     text-transform: uppercase;
@@ -88,34 +104,41 @@ body{
     border-radius: 500px;
     display: inline-block;
     font-weight: 500;
-    transition: all .4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     background-size: 152% 100%;
     background: var(--accent);
     border: 2px solid var(--accent);
 }
-.btn:hover{
-    background: transparent;
+
+/* On hover, make the button's background the primary colour, and make it's text and border the accent colour */
+.btn:hover {
+    background: var(--primary);
     border-color: var(--accent);
     color: var(--accent);
 }
-.content{
+
+.header {
     position: absolute;
-    top: 35%;
+    top: 15%;
     left: 8%;
 }
-.content .title{
+
+.header .title {
     color: #1f1f25;
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 4px;
     display: inline-block;
     margin-bottom: 20px;
-    background: linear-gradient(120deg, #1c99fe 20.69%, #7644ff 50.19%,#fd4766 79.69%);
+    background: linear-gradient(120deg,
+    var(--tertiary) 20.69%,
+    var(--accent) 79.69%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.content h1{
+
+.header h1 {
     color: var(--text);
     font-size: 75px;
     font-weight: 900;
@@ -123,12 +146,77 @@ body{
     text-transform: inherit;
     width: 70%;
 }
-.content h1 span{
+
+.header h1 span {
     color: var(--accent);
 }
-.content p{
+
+.header p {
     width: 55%;
     color: var(--text);
     margin-top: 25px;
     margin-bottom: 30px;
 }
+
+.card-box {
+    /* Spread the card-box's content across the page horizontally */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Ensure there's a small gap between items */
+    padding: 30px 100px;
+    /* Move the content down so that it's below the heading */
+    margin-top: 300px
+    /* Have cards split over multiple lines if they don't fit */
+
+}
+
+.card {
+    /* White background  */
+    background: var(--tertiary);
+    /* Rounded corners */
+    border-radius: 10px;
+    /* Small gap between the card and the content */
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    min-width: 400px;
+}
+
+.card p {
+    /* Make the text black */
+    color: var(--text-secondary);
+    /* Put the text in the middle of the card */
+    text-align: center;
+    /* Make th text take the entire width of the card */
+    width: 100%;
+}    
+
+.card h3 {
+    /* Make the text black */
+    color: var(--text-secondary);
+    /* Put the text in the middle of the card */
+    text-align: center;
+    /* Make the text take the entire width of the card */
+    width: 100%;
+}    
+
+.card img {
+    /* Set the image to cover and keep them the same size*/
+    object-fit: cover;
+    width: 100%;
+    height: 60%;
+    /* Round the corner of the image */
+    border-radius: 10px;
+    /* Make the image a square */
+    aspect-ratio: 1/1;
+    /* Put the image in the middle of the card */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* Put space below the image */
+    margin-bottom: 20px;
+}    
+
+
