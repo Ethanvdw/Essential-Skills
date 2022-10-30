@@ -1,0 +1,292 @@
+/* 
+First, a disclaimer.
+This may not be exclusively responsive design.
+Responsive design relies on changing our design patterns to fit the screen size.
+
+I may also include elements of adaptive design, also known as progressive enhancement, where it makes sense.
+This involves having the site detect available space, and then selecting the most appropriate design for that space.
+Resizing the browser window would then have no effect on the design.
+
+Why would we want this?
+Adaptive design is useful for mobile devices, and allows us to customize our design beyond what is possible with responsive design.
+*/
+
+/*
+Before writing any CSS, we need to decide on some basic principles.
+
+First, which units should we use?
+I'm going to be using relative units, such as em and rem, as they scale to their container.
+This is in contrast to absolute units, such as px.
+Absolute units are fixed, meaning they cause issues when our display size or pixel density changes.
+
+Second, the importance of "flow".
+As screen sizes get smaller, our content will take up more vertical space.
+We need to be able to push our content down the page, and not have it overlap with other elements.
+
+Third, breakpoints.
+We need our layout to change at predictable points.
+Such as having 1 column on mobile, 2 columns on tablet, and 3 columns on desktop.
+Breakpoints should be used with caution, as they can make it difficult to understand what they influence.
+
+Fourth, maximum and minimum values.
+While we want our content to all available space on mobile,
+we don't want it to take up the entire screen on desktop.
+As this can make long paragraphs of text uncomfortable to read.
+
+Fifth, nesting.
+It will be difficult to remember how all of our elements interact with each other.
+Grouping them into containers will keep pages easier to control.
+
+Sixth, webfonts versus system fonts.
+Webfonts are nice, but they can be slow to load.
+System fonts are fast, but they have a limited selection of fonts.
+I'll make limited use of webfonts, and will use system fonts for the rest.
+
+Finally, when to use bitmap images and vectors.
+Bitmap images are pixel-based, and are best for photographs.
+Vectors are resolution-independent, and are best for icons and logos.
+
+Both types have important considerations.
+For bitmap images, we need to optimize them for the web.
+This involves resizing them to the appropriate size, and compressing them.
+For vectors, we need to remember that some older browsers don't support them.
+Complicated vectors may also be slow to load.
+*/
+
+/*
+How should CSS be organized?
+There are principles we need to consider.
+
+First, CSS is a cascade.
+This means that the last CSS rule to be applied will be the one that is used.
+As a result, we need to put more general rules at the top, and more specific rules at the bottom.
+
+Second is the DRY principle.
+Don't Repeat Yourself.
+We need to avoid what's known as "cascading specificity".
+This is where we have multiple rules that are all applied to the same element.
+This can cause confusion, and make it difficult to understand what is happening.
+
+*/
+
+/* Imports the chosen font through the google API, alongside required weights. */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* CSS colour variables */
+:root {
+    --primary: #1d1d24;
+    --accent: #fdeb47;
+    --secondary: #6171ff;
+    --tertiary: #ffffff;
+    --text: #ffffff;
+    --text-secondary: #1d1d24;
+}
+
+/* All elements */
+* {
+    /* Ensures that the web page fills the entire viewport */
+    margin: 0;
+    padding: 0;
+    /* Includes the padding and border in the width and height of elements. */
+    box-sizing: border-box;
+    /* Sets the default font for the webpage. */
+    font-family: "Poppins", sans-serif;
+}
+
+/* Links */
+a {
+    /* Removes the underline from link */
+    text-decoration: none;
+}
+
+/* The primary content of the web page. */
+.hero {
+    width: 100%;
+    height: 100vh;
+    background: url(images/..jpg);
+    background-size: cover;
+}
+
+nav {
+    /* Spread the nav's content across the page horizontally */
+    display: flex;
+    justify-content: space-between;
+    /* Ensure there's a small gap between items */
+    padding: 1.875rem 6.25rem;
+}
+
+.logo {
+    /* Ensures the logo is always the same size */
+    max-height: 3.75em;
+}
+
+nav ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+}
+
+nav ul li a {
+    color: var(--text);
+    position: relative;
+    padding: 0.3125rem 0;
+}
+
+/* Make the active link coloured */
+nav ul li a.active {
+    color: var(--accent);
+}
+
+nav ul li a:hover {
+    color: var(--accent);
+}
+
+/* This is to make an animation on hovering over a link */
+nav ul li a:after {
+    /* Empty generated content is added to the css */
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 0;
+    /* The empty generated content is made to be 3px tall */
+    height: 0.1875rem;
+    /* Make the background of the generated content yellow */
+    background: var(--accent);
+    /* The time it takes for the animation to play over */
+    transition: 0.3s;
+    bottom: 0;
+}
+
+nav ul li a:hover:after {
+    /* On hover, widen the content */
+    width: 100%;
+}
+
+body {
+    background: var(--primary);
+}
+
+.btn {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.125rem;
+    padding: 1rem 2.5rem;
+    border-radius: 2rem;
+    display: inline-block;
+    font-weight: 500;
+    transition: all 0.4s ease-in-out;
+    background: var(--accent);
+    border: 0.125rem solid var(--accent);
+}
+
+/* On hover, make the button's background the primary colour, and make it's text and border the accent colour */
+.btn:hover {
+    background: var(--primary);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+header {
+    position: absolute;
+    top: 15%;
+    left: 8%;
+}
+
+header .title {
+    color: #1f1f25;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    display: inline-block;
+    margin-bottom: 20px;
+    background: linear-gradient(120deg,
+    var(--tertiary) 20.69%,
+    var(--accent) 79.69%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header h1 {
+    color: var(--text);
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: inherit;
+    width: 70%;
+}
+
+header span {
+    color: var(--accent);
+}
+
+header p {
+    width: 55%;
+    color: var(--text);
+    margin-top: 1.5625rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-box {
+    /* Spread the card-box's content across the page horizontally */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Ensure there's a small gap between items */
+    padding: 1.875rem 6.25rem;
+    /* Move the content down so that it's below the heading */
+    margin-top: 18.75rem;   
+    /* Have cards split over multiple lines if they don't fit */
+
+}
+
+.card {
+    /* White background  */
+    background: var(--tertiary);
+    /* Rounded corners */
+    border-radius: 1em;
+    /* Small gap between the card and the content */
+    padding: 1.25rem;
+    margin: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 23em;
+}
+
+.card p {
+    /* Make the text black */
+    color: var(--text-secondary);
+    /* Put the text in the middle of the card */
+    text-align: center;
+    /* Make th text take the entire width of the card */
+    width: 100%;
+    margin-bottom: 2.5rem;
+}    
+
+.card h3 {
+    /* Make the text black */
+    color: var(--text-secondary);
+    /* Put the text in the middle of the card */
+    text-align: center;
+    /* Make the text take the entire width of the card */
+    width: 100%;
+}    
+
+.card img {
+    /* Set the image to cover and keep them the same size*/
+    object-fit: cover;
+    width: 100%;
+    height: 60%;
+    /* Round the corner of the image */
+    border-radius: 1em;
+    /* Make the image a square */
+    aspect-ratio: 1/1;
+    /* Put the image in the middle of the card */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* Put space below the image */
+    margin-bottom: 20px;
+    margin-bottom: 2rem;
+}    
+
+
