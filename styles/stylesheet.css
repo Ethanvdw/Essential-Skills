@@ -113,11 +113,14 @@ nav {
     justify-content: space-between;
     /* Ensure there's a small gap between items */
     padding: 1.875rem 6.25rem;
+    align-items: center;
 }
 
 .logo {
     /* Ensures the logo is always the same size */
     max-height: 3.75em;
+    /* Make the logo bright */
+    filter: brightness(0) invert(1);
 }
 
 nav ul li {
@@ -178,6 +181,10 @@ body {
     transition: all 0.4s ease-in-out;
     background: var(--accent);
     border: 0.125rem solid var(--accent);
+    /* Buttons need to stay a constant aspect ratio */
+    min-height: 4rem;
+    max-height: 4rem;
+
 }
 
 /* On hover, make the button's background the primary colour, and make it's text and border the accent colour */
@@ -188,10 +195,11 @@ body {
 }
 
 header {
-    position: absolute;
+    position: relative;
     top: 15%;
     left: 8%;
 }
+
 
 header .title {
     color: #1f1f25;
@@ -227,6 +235,11 @@ header p {
     margin-bottom: 1.5rem;
 }
 
+header p a {
+    color: var(--accent);
+}
+
+
 .card-box {
     /* Spread the card-box's content across the page horizontally */
     display: flex;
@@ -235,7 +248,7 @@ header p {
     /* Ensure there's a small gap between items */
     padding: 1.875rem 6.25rem;
     /* Move the content down so that it's below the heading */
-    margin-top: 18.75rem;   
+    margin-top: 1.75rem;   
     /* Have cards split over multiple lines if they don't fit */
 
 }
@@ -287,6 +300,4 @@ header p {
     /* Put space below the image */
     margin-bottom: 20px;
     margin-bottom: 2rem;
-}    
-
-
+}
