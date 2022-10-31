@@ -18,10 +18,12 @@ As padding and border will now be included in the width and height,
 
 We also set the margin and padding to 0 for all elements, to ensure more consistent spacing across browsers.
 */
-*, *:before, *:after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 /*
@@ -31,21 +33,21 @@ First, we ensure that background images never repeat.
 Then we set ensure background images are always centered.
 Finally we set the background image to cover the entire page, even if this results in some cropping.
 */
-*:not(body){
-    /* 
+*:not(body) {
+	/* 
     The background-repeat property sets if/how a background image will be repeated.
     We don't want the background image to repeat.  
     */
-    background-repeat: no-repeat;
-    /* 
+	background-repeat: no-repeat;
+	/* 
     When setting a background image, we can now default to putting it in the center of the element.
     */
-    background-position: center center;
-    /*
+	background-position: center center;
+	/*
     Setting background size to cover ensures that image always fills the container
     even if it needs to crop or stretch the image.
     */
-    background-size: cover;
+	background-size: cover;
 }
 
 /* 
@@ -55,22 +57,23 @@ the other two items will still be spread out across the container.
 
 Adding the following CSS will ensure that hidden elements don't take up space in a flex container.
 */
-[hidden]{
-    display: none !important;
+[hidden] {
+	display: none !important;
 }
 
 /*
 I'm not fond of the bullet points that are added to lists by default as they don't look very good.
 */
-ul, menu {
-    list-style: none;
+ul,
+menu {
+	list-style: none;
 }
 
 /*
 I don't like the underline that is added to links by default.
  */
 a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 /* 
@@ -87,7 +90,7 @@ The default iframe borders are unappealing.
 I've removed them for now, but may restyle them later.
 */
 iframe {
-    border: none;
+	border: none;
 }
 
 /* 
@@ -95,6 +98,6 @@ By default, cells have their own borders and there may be a gap between them.
 As tables are not used for layout, I've removed the borders and spacing.
 This will make it clearer that the table is used to display data.
  */
-*{
-    border-collapse: collapse;
+* {
+	border-collapse: collapse;
 }
