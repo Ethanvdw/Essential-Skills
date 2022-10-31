@@ -93,18 +93,14 @@ This can cause confusion, and make it difficult to understand what is happening.
 	font-family: "Poppins", sans-serif;
 }
 
+body {
+	background: var(--primary);
+}
+
 /* Links */
 a {
 	/* Removes the underline from link */
 	text-decoration: none;
-}
-
-/* The primary content of the web page. */
-.hero {
-	width: 100%;
-	height: 100vh;
-	background: url(images/..jpg);
-	background-size: cover;
 }
 
 nav {
@@ -114,13 +110,6 @@ nav {
 	/* Ensure there's a small gap between items */
 	padding: 1.875rem 6.25rem;
 	align-items: center;
-}
-
-.logo {
-	/* Ensures the logo is always the same size */
-	max-height: 3.75em;
-	/* Make the logo bright */
-	filter: brightness(0) invert(1);
 }
 
 nav ul li {
@@ -165,9 +154,21 @@ nav ul li a:hover:after {
 	width: 100%;
 }
 
-body {
-	background: var(--primary);
+/* The primary content of the web page. */
+.hero {
+	width: 100%;
+	height: 100vh;
+	background: url(images/..jpg);
+	background-size: cover;
 }
+
+.logo {
+	/* Ensures the logo is always the same size */
+	max-height: 3.75em;
+	/* Make the logo bright */
+	filter: brightness(0) invert(1);
+}
+
 
 .btn {
 	color: var(--text-secondary);
@@ -209,7 +210,7 @@ header .title {
 		120deg,
 		var(--tertiary) 20.69%,
 		var(--accent) 79.69%
-	);
+		);
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -273,7 +274,7 @@ header p a {
 	margin-bottom: 2.5rem;
 }
 
-.card h3 {
+.card h2 {
 	/* Make the text black */
 	color: var(--text-secondary);
 	/* Put the text in the middle of the card */
@@ -298,4 +299,21 @@ header p a {
 	/* Put space below the image */
 	margin-bottom: 20px;
 	margin-bottom: 2rem;
+}
+
+/* On mobile devices, hide the logo and contact button */
+@media screen and (max-width: 960px) {
+	.logo, nav .btn {
+		display: none;
+	}
+	/* Make the nav a vertical list */
+	nav ul {
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		width: 100%;
+		background: var(--primary);
+		text-align: center;
+		transition: 0.3s;
+	}
 }
