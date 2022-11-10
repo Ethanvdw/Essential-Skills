@@ -220,7 +220,13 @@ button:hover, .btn:hover {
 }
 
 button, .btn, .btn:hover, nav ul li{
-	/* We don't want the user to accidentally select the text on a button when they're trying to click it. */
+	/* We don't want the user to accidentally select the text on a button when they're trying to click it.
+	
+	
+	-webkit-touch-callout removes the callout information when a target is held on iOS.
+	It is non-standard, and the only browser that supports it is Safari on iOS.
+	It may be worth removing this for accessibility reasons, but currently it is the only way to remove the callout information on iOS.
+	In my testing it has been reliable, but I would like to test it on more devices.*/
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -232,7 +238,8 @@ button, .btn, .btn:hover, nav ul li{
 header {
 	position: relative;
 	top: 15%;
-	left: 8%;
+	/* Left padding */
+	padding-left: 6.25rem;
 	/* This will make the header's width the width of its content */
 	display: inline-block;
 }
@@ -266,14 +273,14 @@ header p a {
 	display: flex;
 	flex-wrap: wrap;
 	/* Align item to the middle of the flexbox */
-	align-items: middle;
 	justify-content: space-between;
 	/* Keep cards closer together */
-	padding: 0 6.25rem;
+	padding: 0 5.25rem;
 	/* Move the content down so that it's below the heading */
 	margin-top: 1.75rem;
-	/* If the viewport is narrow, remove the horizontal padding and margin */
 }
+
+/* The card-box leaves blank space to the right. This removes that issue */
 
 .card {
 	/* White background  */
@@ -282,11 +289,18 @@ header p a {
 	border-radius: 1em;
 	/* Small gap between the card and the content */
 	padding: 1.25rem;
-	margin: 0.5rem;
+	padding-bottom: 0%;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	/* TODO: setting max-width with em feels clunky. Find a better way to do this */
-	max-width: 23em
+	max-width: 23em;
+	max-height: fit-content;
+	min-height: 38.5em;
+	margin-bottom: 2rem;
+	margin-left: auto;
+	margin-right: auto;
 }
+
+/* Make the cards all the same size, regardless of if they have content or not */
 
 .card p {
 	/* Make the text black */
@@ -361,14 +375,13 @@ input {
 		transition: 0.3s;
 	}
 
-	.card-box{
-		/* If the viewport is narrow, remove the horizontal padding and margin */
+	.card-box {
 		padding: 0;
 		margin: 0;
 	}
 
 	header {
-		left: 0;
+		padding-left: 0%;
 		text-align: center;
 		/* Align to the middle */
 		align-items: center;
