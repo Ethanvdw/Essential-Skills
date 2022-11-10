@@ -66,11 +66,34 @@ Don't Repeat Yourself.
 We need to avoid what's known as "cascading specificity".
 This is where we have multiple rules that are all applied to the same element.
 This can cause confusion, and make it difficult to understand what is happening.
-
 */
 
-/* Imports the chosen font through the google API, alongside required weights. */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@font-face {
+	font-family: 'Mona Sans';
+	src:
+		url('/fonts/Mona-Sans.woff2') format('woff2 supports variations'),
+		url('/fonts/Mona-Sans.woff2') format('woff2-variations');
+
+	/* Fallback for Safari 14.0 and below */
+	@supports not (font-variation-settings: normal) {
+		font-weight: 200 900;
+		font-stretch: 75% 125%;
+	}
+}
+
+@font-face {
+	font-family: 'Hubot Sans';
+	src:
+		url('/fonts/Hubot-Sans.woff2') format('woff2 supports variations'),
+		url('/fonts/Hubot-Sans.woff2') format('woff2-variations');
+	font-weight: 200 900;
+	font-stretch: 75% 125%;
+
+	@supports not (font-variation-settings: normal) {
+		font-weight: 200 900;
+		font-stretch: 75% 125%;
+	}
+}
 
 /* CSS colour variables */
 :root {
@@ -90,8 +113,9 @@ This can cause confusion, and make it difficult to understand what is happening.
 	/* Includes the padding and border in the width and height of elements. */
 	box-sizing: border-box;
 	/* Sets the default font for the webpage. */
-	font-family: "Poppins", sans-serif;
-}
+	font-family: 'Mona Sans';
+	/* Makes sure that content always fits horizontally */
+} 
 
 body {
 	background: var(--primary);
@@ -163,19 +187,20 @@ nav ul li a:hover:after {
 }
 
 .logo {
-	/* Ensures the logo is always the same size */
+	/* Ensures the logo is large enough to be seen on mobile */
 	max-height: 3.75em;
-	/* Make the logo bright */
+	/* Makes the logo white */
 	filter: brightness(0) invert(1);
 }
 
 
-.btn {
+button, .btn {
+	font-family: 'Hubot Sans';
 	color: var(--text-secondary);
-	font-size: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 0.125rem;
-	padding: 1rem 2.5rem;
+	padding: 1.25rem 2.5rem;
+	/* Updated padding to put the item in the middle of the button */
 	border-radius: 2rem;
 	display: inline-block;
 	font-weight: 500;
@@ -188,39 +213,36 @@ nav ul li a:hover:after {
 }
 
 /* On hover, make the button's background the primary colour, and make it's text and border the accent colour */
-.btn:hover {
+button:hover, .btn:hover {
 	background: var(--primary);
 	border-color: var(--accent);
 	color: var(--accent);
+}
+
+button, .btn, .btn:hover, nav ul li{
+	/* We don't want the user to accidentally select the text on a button when they're trying to click it. */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 header {
 	position: relative;
 	top: 15%;
 	left: 8%;
-}
-
-header .title {
-	color: #1f1f25;
-	text-transform: uppercase;
-	letter-spacing: 4px;
+	/* This will make the header's width the width of its content */
 	display: inline-block;
-	margin-bottom: 20px;
-	background: linear-gradient(
-		120deg,
-		var(--tertiary) 20.69%,
-		var(--accent) 79.69%
-		);
-	-webkit-background-clip: text;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;
 }
 
 header h1 {
+	font-family: 'Hubot Sans';
 	color: var(--text);
-	font-size: 5rem;
-	font-weight: 900;
-	line-height: 1.2;
+	font-size: 6vw;
+	font-weight: 700;
+	line-height: 1;
 	text-transform: inherit;
 	width: 70%;
 }
@@ -241,15 +263,16 @@ header p a {
 }
 
 .card-box {
-	/* Spread the card-box's content across the page horizontally */
 	display: flex;
 	flex-wrap: wrap;
+	/* Align item to the middle of the flexbox */
+	align-items: middle;
 	justify-content: space-between;
-	/* Ensure there's a small gap between items */
-	padding: 1.875rem 6.25rem;
+	/* Keep cards closer together */
+	padding: 0 6.25rem;
 	/* Move the content down so that it's below the heading */
 	margin-top: 1.75rem;
-	/* Have cards split over multiple lines if they don't fit */
+	/* If the viewport is narrow, remove the horizontal padding and margin */
 }
 
 .card {
@@ -261,7 +284,8 @@ header p a {
 	padding: 1.25rem;
 	margin: 0.5rem;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	max-width: 23em;
+	/* TODO: setting max-width with em feels clunky. Find a better way to do this */
+	max-width: 23em
 }
 
 .card p {
@@ -288,6 +312,7 @@ header p a {
 	object-fit: cover;
 	width: 100%;
 	height: 60%;
+	max-width: fit-content;
 	/* Round the corner of the image */
 	border-radius: 1em;
 	/* Make the image a square */
@@ -301,19 +326,52 @@ header p a {
 	margin-bottom: 2rem;
 }
 
-/* On mobile devices, hide the logo and contact button */
+/* Styling for a form input field */
+input {
+	border: none;
+	/* Round the border */
+	border-radius: 0.5rem;
+	border-bottom: 0.125rem solid var(--text-secondary);
+	padding: 0.5rem;
+	color: var(--text-secondary);
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin-bottom: 1.25rem;
+	/* Remove the highlight when you click on it */
+	outline: none;
+}
+
+
 @media screen and (max-width: 960px) {
 	.logo, nav .btn {
 		display: none;
 	}
-	/* Make the nav a vertical list */
-	nav ul {
+
+	nav ul, header {
 		display: flex;
 		flex-direction: column;
 		position: relative;
 		width: 100%;
+	}
+	/* Make the nav a vertical list */
+	nav ul {
 		background: var(--primary);
 		text-align: center;
 		transition: 0.3s;
+	}
+
+	.card-box{
+		/* If the viewport is narrow, remove the horizontal padding and margin */
+		padding: 0;
+		margin: 0;
+	}
+
+	header {
+		left: 0;
+		text-align: center;
+		/* Align to the middle */
+		align-items: center;
+		top: 0;
 	}
 }
