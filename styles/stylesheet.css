@@ -356,6 +356,95 @@ input {
 	outline: none;
 }
 
+footer {
+	/* Put the footer at the bottom of the page */
+	position: relative;
+	bottom: 0;
+	/* Make the footer the same width as the page */
+	width: 100%;
+	/* Make the footer the same height as the nav bar */
+	height: 4rem;
+	/* Make the footer the same colour as the nav bar */
+	background: var(--primary);
+}
+
+footer p {
+	/* Make the text white */
+	color: var(--text);
+	/* Put the text in the middle of the footer */
+	text-align: center;
+	/* Put the text on a new line */
+	display: block;
+	margin-top: 1.25rem;
+}
+
+footer p a {
+	/* Make the text white */
+	color: var(--text);
+}
+
+footer p a:hover {
+	/* On hover, make the text the accent colour */
+	color: var(--accent);
+}
+
+footer p a:active {
+	/* On active, make the text the accent colour */
+	color: var(--accent);
+}
+
+/* The media queries for mobile */
+@media only screen and (max-width: 800px) {
+	/* The nav bar */
+	nav {
+		/* Remove the nav bar's background */
+		background: none;
+	}
+
+	nav ul {
+		/* Remove the nav bar's background */
+		background: none;
+	}
+
+	nav ul li a {
+		/* Make the text white */
+		color: var(--text);
+		/* Make the text the same size as the desktop version */
+		font-size: 1.125rem;
+	}
+
+	nav ul li a:hover {
+		/* On hover, make the text the accent colour */
+		color: var(--accent);
+	}
+
+	nav ul li a:hover:after {
+		/* On hover, make the text the accent colour */
+		background-color: var(--accent);
+	}
+
+	/* The logo */
+	.logo {
+		/* Make the logo white */
+		filter: brightness(0) invert(1);
+	}
+
+	/* The header */
+	header {
+		/* Remove the left padding */
+		padding-left: 0;
+	}
+
+	header h1 {
+		/* Make the text the same size as the desktop version */
+		font-size: 4.5rem;
+	}
+
+	header p {
+		/* Make the text the same size as the desktop version */
+		font-size: 1.25rem;
+	}
+}
 
 @media screen and (max-width: 960px) {
 	.logo, nav .btn {
@@ -413,6 +502,10 @@ input {
 		top: 0;
 	}
 
+	header h1 {
+		font-size: 6vw;
+	}
+
 	.btn:hover, button:hover {
 		/* Do nothing on hover */
 		background: var(--accent);
@@ -423,5 +516,10 @@ input {
 	nav ul li a:hover:after {
 		/* On hover, widen the content */
 		width: 0%;
+	}
+
+	/* A small amount of padding for the footer */
+	footer {
+		padding: 0.5rem;
 	}
 }
