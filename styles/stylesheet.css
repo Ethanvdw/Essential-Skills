@@ -444,9 +444,7 @@ footer p a:active {
 		/* Make the text the same size as the desktop version */
 		font-size: 1.25rem;
 	}
-}
 
-@media screen and (max-width: 960px) {
 	.logo, nav .btn {
 		display: none;
 	}
@@ -455,13 +453,18 @@ footer p a:active {
 		background-color: var(--accent);
 	}
 
-	nav ul li a {
+	nav ul li a{
 		color: var(--text-secondary);
 	}
 
 	nav ul li a.active{
 		color: var(--text-secondary);
 	}
+
+	nav ul li a:hover {
+		color: var(--text-secondary);
+	}
+
 
 	/* Put a black line under the active link */
 	nav ul li a.active::after {
@@ -506,6 +509,13 @@ footer p a:active {
 		font-size: 6vw;
 	}
 
+
+
+	/* A small amount of padding for the footer */
+	footer {
+		padding: 0.5rem;
+	}
+
 	.btn:hover, button:hover {
 		/* Do nothing on hover */
 		background: var(--accent);
@@ -513,13 +523,4 @@ footer p a:active {
 		color: var(--primary);
 	}
 
-	nav ul li a:hover:after {
-		/* On hover, widen the content */
-		width: 0%;
-	}
-
-	/* A small amount of padding for the footer */
-	footer {
-		padding: 0.5rem;
-	}
 }
