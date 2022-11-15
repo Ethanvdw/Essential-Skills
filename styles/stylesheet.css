@@ -53,8 +53,13 @@ Not all of these colours are used in this stylesheet, but I've included them to 
 
 }
 
+
 body {
-    background : var(--primary);
+    background-image: url("/images/hero.jpg");
+    background-attachment : fixed;
+    background-size  : cover;
+    height           : 100vh;
+    width            : 100%;
 }
 
 
@@ -124,15 +129,6 @@ nav ul li a:hover:after {
     width : 100%;
 }
 
-/*
-The hero class controls the banner of the website
-I've included the background-size property for if I want to use a background image in the future.
-*/
-.hero {
-    background-size : cover;
-    height          : 100vh;
-    width           : 100%;
-}
 
 /*
 The logo class controls the logo in the top left of the website.
@@ -188,7 +184,7 @@ header {
     display      : inline-block;
     padding-left : 6.25rem;
     position     : relative;
-    top          : 15%;
+    top          : 0%;
 }
 
 header h1 {
@@ -293,11 +289,11 @@ input {
 }
 
 footer {
-    background : var(--primary);
-    bottom     : 0;
-    height     : 4rem;
-    position   : relative;
+    /* background : var(--primary); */
+    height     : auto;
     width      : 100%;
+    bottom     : 0;
+    position   : relative;
 }
 
 footer p {
@@ -324,7 +320,9 @@ The media query below is used to change the layout of the website when the scree
 This helps to make the website more responsive and easier to use on mobile devices.
 */
 @media only screen and (max-width : 800px) {
-
+    .hero{
+        background-image: none;
+    }
     nav ul li a {
         color     : var(--text);
         font-size : 1.125rem;
