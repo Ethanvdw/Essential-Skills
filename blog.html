@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Personal Portfolio Website</title>
-    <!----CSS files----->
-    <link rel="stylesheet" href="/styles/better_defaults.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
-    <!-- Use a favicon -->
-    <link rel="icon" href="images/mortarboard.png" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="icon" href="images/meta/mortarboard.png" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Preload my fonts reduce CLS (Cumulative layout shift) which will help keep the layout more constant as the site loads.-->
     <link rel="preload" href="/fonts/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/Hubot-Sans.woff2" as="font" type="font/woff2" crossorigin>
@@ -16,7 +15,7 @@
 <body>
     <div class="hero">
         <nav>
-            <img src="images/keyboard.png" alt="Line art of a cat" class="logo">
+            <img src="images/meta/keyboard.png" alt="Line art of a cat" class="logo">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -29,11 +28,14 @@
         <header>
             <h1>You're <span>early!</span></h1>
             <p>My blog isn't ready just yet.</p>
-            <p>Enter your email here and I'll let you know when it goes live.</p>
+            <p>Enter your email here, and I'll let you know when it goes live.</p>
             <!-- Let the user sign up to receive an email when it's ready -->
             <form action="https://formspree.io/f/xeqdvnwq" method="POST">
-                <input type="email" name="email" placeholder="Your email" required>
+                <label>
+                    <input type="email" name="email" placeholder="Your email" required>
+                </label>
                 <button type="submit">Notify me</button>
+            </form>
         </header>
     </div>
 </body>

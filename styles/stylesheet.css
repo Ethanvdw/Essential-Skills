@@ -1,528 +1,442 @@
-/* 
-First, a disclaimer.
-This may not be exclusively responsive design.
-Responsive design relies on changing our design patterns to fit the screen size.
-
-I may also include elements of adaptive design, also known as progressive enhancement, where it makes sense.
-This involves having the site detect available space, and then selecting the most appropriate design for that space.
-Resizing the browser window would then have no effect on the design.
-
-Why would we want this?
-Adaptive design is useful for mobile devices, and allows us to customize our design beyond what is possible with responsive design.
-*/
-
 /*
-Before writing any CSS, we need to decide on some basic principles.
-
-First, which units should we use?
-I'm going to be using relative units, such as em and rem, as they scale to their container.
-This is in contrast to absolute units, such as px.
-Absolute units are fixed, meaning they cause issues when our display size or pixel density changes.
-
-Second, the importance of "flow".
-As screen sizes get smaller, our content will take up more vertical space.
-We need to be able to push our content down the page, and not have it overlap with other elements.
-
-Third, breakpoints.
-We need our layout to change at predictable points.
-Such as having 1 column on mobile, 2 columns on tablet, and 3 columns on desktop.
-Breakpoints should be used with caution, as they can make it difficult to understand what they influence.
-
-Fourth, maximum and minimum values.
-While we want our content to all available space on mobile,
-we don't want it to take up the entire screen on desktop.
-As this can make long paragraphs of text uncomfortable to read.
-
-Fifth, nesting.
-It will be difficult to remember how all of our elements interact with each other.
-Grouping them into containers will keep pages easier to control.
-
-Sixth, webfonts versus system fonts.
-Webfonts are nice, but they can be slow to load.
-System fonts are fast, but they have a limited selection of fonts.
-I'll make limited use of webfonts, and will use system fonts for the rest.
-
-Finally, when to use bitmap images and vectors.
-Bitmap images are pixel-based, and are best for photographs.
-Vectors are resolution-independent, and are best for icons and logos.
-
-Both types have important considerations.
-For bitmap images, we need to optimize them for the web.
-This involves resizing them to the appropriate size, and compressing them.
-For vectors, we need to remember that some older browsers don't support them.
-Complicated vectors may also be slow to load.
-*/
-
-/*
-How should CSS be organized?
-There are principles we need to consider.
-
-First, CSS is a cascade.
-This means that the last CSS rule to be applied will be the one that is used.
-As a result, we need to put more general rules at the top, and more specific rules at the bottom.
-
-Second is the DRY principle.
-Don't Repeat Yourself.
-We need to avoid what's known as "cascading specificity".
-This is where we have multiple rules that are all applied to the same element.
-This can cause confusion, and make it difficult to understand what is happening.
-*/
-
+The @font-face rule allows me to use a font that is not installed on the user's computer.
+I just need to specify the font's name, the path to the font file, and the font's format.
+ */
 @font-face {
-	font-family: "Mona Sans";
-	src: url("/fonts/Mona-Sans.woff2") format("woff2 supports variations"),
-		url("/fonts/Mona-Sans.woff2") format("woff2-variations");
-
-	/* Fallback for Safari 14.0 and below */
-	@supports not (font-variation-settings: normal) {
-		font-weight: 200 900;
-		font-stretch: 75% 125%;
-	}
+    font-family  : "Mona Sans";
+    /*
+    The supports variations part is optional.
+    It is only required when the font file does not contain "wght" and "wdth" axes
+    */
+    src          : url("/fonts/Mona-Sans.woff2") format("woff2 supports variations"),
+    url("/fonts/Mona-Sans.woff2") format("woff2-variations");
+    /* The font supports weights from 200 to 900 */
+    font-weight  : 200 900;
+    /*  The fonts supports widths between 75% and 125% */
+    font-stretch : 75% 125%;
 }
 
 @font-face {
-	font-family: "Hubot Sans";
-	src: url("/fonts/Hubot-Sans.woff2") format("woff2 supports variations"),
-		url("/fonts/Hubot-Sans.woff2") format("woff2-variations");
-	font-weight: 200 900;
-	font-stretch: 75% 125%;
-
-	@supports not (font-variation-settings: normal) {
-		font-weight: 200 900;
-		font-stretch: 75% 125%;
-	}
+    font-family  : "Hubot Sans";
+    src          : url("/fonts/Hubot-Sans.woff2") format("woff2 supports variations"),
+    url("/fonts/Hubot-Sans.woff2") format("woff2-variations");
+    font-weight  : 200 900;
+    font-stretch : 75% 125%;
 }
 
-/* CSS colour variables */
+/*
+Variables are declared using the :root pseudo-class.
+I've used this only for colours, but it could be used for any CSS property.
+
+Not all of these colours are used in this stylesheet, but I've included them to aid future development.
+*/
+
 :root {
-	--primary: #1d1d24;
-	--accent: #fdeb47;
-	--secondary: #6171ff;
-	--tertiary: #ffffff;
-	--text: #ffffff;
-	--text-secondary: #1d1d24;
+    --accent         : #FDEB47;
+    --primary        : #1D1D24;
+    --secondary      : #6171FF;
+    --tertiary       : #FFFFFF;
+    --text           : #FFFFFF;
+    --text-secondary : #1D1D24;
 }
 
-/* All elements */
+/* The asterisk selector is a wild-card that means all elements.*/
 * {
-	/* Ensures that the web page fills the entire viewport */
-	margin: 0;
-	padding: 0;
-	/* Includes the padding and border in the width and height of elements. */
-	box-sizing: border-box;
-	/* Sets the default font for the webpage. */
-	font-family: "Mona Sans";
-	/* Makes sure that content always fits horizontally */
+    /*
+    The box-sizing property is used to define how the width and height of an element are calculated.
+    The border-box value is used so that the width and height properties include the padding and border.
+    */
+    box-sizing  : border-box;
+    font-family : "Mona Sans", sans-serif;
+    margin      : 0;
+    padding     : 0;
+
 }
 
 body {
-	background: var(--primary);
+    background : var(--primary);
 }
 
-/* Links */
+
 a {
-	/* Removes the underline from link */
-	text-decoration: none;
+    /* Remove the underline from links*/
+    text-decoration : none;
 }
 
 nav {
-	/* Spread the nav's content across the page horizontally */
-	display: flex;
-	justify-content: space-between;
-	/* Ensure there's a small gap between items */
-	padding: 1.875rem 6.25rem;
-	align-items: center;
+    align-items     : center;
+    display         : flex;
+    justify-content : space-between;
+    padding         : 1.875rem 6.25rem;
 }
 
 nav ul li {
-	list-style: none;
-	display: inline-block;
-	padding: 0.625rem 1.25rem;
+    /*
+    The display property is used to define the type of box an element generates.
+    The inline-block value is used to display the element as an inline box, but allowing the width and height properties to be used.
+    */
+    display    : inline-block;
+    /*
+    The list-style property is used to remove the bullet points from the list.
+    */
+    list-style : none;
+    padding    : 0.625rem 1.25rem;
 }
 
 nav ul li a {
-	color: var(--text);
-	position: relative;
-	padding: 0.3125rem 0;
+    color    : var(--text);
+    padding  : 0.3125rem 0;
+    /*
+    The position property is used to define the type of positioning method used for an element.
+    The relative value is used to position the element relative to its normal position.
+   */
+    position : relative;
 }
 
-/* Make the active link coloured */
+
 nav ul li a.active {
-	color: var(--accent);
+    color : var(--accent);
 }
 
+/* The hover pseudo-class controls styling applied when the mouse hovers over an element*/
 nav ul li a:hover {
-	color: var(--accent);
+    color : var(--accent);
 }
 
-/* This is to make an animation on hovering over a link */
+/*
+The after pseudo-class inserts content after an element.
+I've used it alongside the :hover:after pseudo-class to create a line that appears under the link when the mouse hovers over it.
+This is done by setting the content property to an empty string, and then setting the width and height properties.
+On hover, the width property is set to 100% to make the line appear.
+*/
 nav ul li a:after {
-	/* Empty generated content is added to the css */
-	content: "";
-	position: absolute;
-	left: 0;
-	width: 0;
-	/* The empty generated content is made to be 3px tall */
-	height: 0.1875rem;
-	/* Make the background of the generated content yellow */
-	background: var(--accent);
-	/* The time it takes for the animation to play over */
-	transition: 0.3s;
-	bottom: 0;
+    background : var(--accent);
+    bottom     : 0;
+    content    : "";
+    height     : 0.1875rem;
+    left       : 0;
+    position   : absolute;
+    transition : 0.3s;
+    width      : 0;
 }
 
 nav ul li a:hover:after {
-	/* On hover, widen the content */
-	width: 100%;
+    width : 100%;
 }
 
-/* The primary content of the web page. */
+/*
+The hero class controls the banner of the website
+I've included the background-size property for if I want to use a background image in the future.
+*/
 .hero {
-	width: 100%;
-	height: 100vh;
-	background: url(images/..jpg);
-	background-size: cover;
+    background-size : cover;
+    height          : 100vh;
+    width           : 100%;
 }
 
+/*
+The logo class controls the logo in the top left of the website.
+*/
 .logo {
-	/* Ensures the logo is large enough to be seen on mobile */
-	max-height: 3.75em;
-	/* Makes the logo white */
-	filter: brightness(0) invert(1);
+    /*
+    The filter property dynamically edits an image.
+    I've used it to make the logo white, so that it stands out against the dark background.
+    I've done this in the stylesheet so that I can change the logo if I want to, without having to edit it.
+    */
+    filter     : brightness(0) invert(1);
+    max-height : 3.75em;
 }
 
 button,
 .btn {
-	font-family: "Hubot Sans";
-	color: var(--text-secondary);
-	text-transform: uppercase;
-	letter-spacing: 0.125rem;
-	padding: 1.25rem 2.5rem;
-	/* Updated padding to put the item in the middle of the button */
-	border-radius: 2rem;
-	display: inline-block;
-	font-weight: 500;
-	transition: all 0.4s ease-in-out;
-	background: var(--accent);
-	border: 0.125rem solid var(--accent);
-	/* Buttons need to stay a constant aspect ratio */
-	min-height: 4rem;
-	max-height: 4rem;
+    background     : var(--accent);
+    border         : 0.125rem solid var(--accent);
+    border-radius  : 2rem;
+    color          : var(--text-secondary);
+    display        : inline-block;
+    font-family    : "Hubot Sans", sans-serif;
+    font-weight    : 500;
+    letter-spacing : 0.125rem;
+    max-height     : 4rem;
+    min-height     : 4rem;
+    padding        : 1.25rem 2.5rem;
+    text-transform : uppercase;
+    transition     : all 0.4s ease-in-out;
 }
 
-/* On hover, make the button's background the primary colour, and make it's text and border the accent colour */
+
 button:hover,
 .btn:hover {
-	background: var(--primary);
-	border-color: var(--accent);
-	color: var(--accent);
+    background   : var(--primary);
+    border-color : var(--accent);
+    color        : var(--accent);
 }
 
 button,
 .btn,
 .btn:hover,
 nav ul li {
-	/* We don't want the user to accidentally select the text on a button when they're trying to click it.
-	
-	
-	-webkit-touch-callout removes the callout information when a target is held on iOS.
-	It is non-standard, and the only browser that supports it is Safari on iOS.
-	It may be worth removing this for accessibility reasons, but currently it is the only way to remove the callout information on iOS.
-	In my testing it has been reliable, but I would like to test it on more devices.*/
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+
+    -webkit-touch-callout : none;
+    -moz-user-select      : none;
+    -ms-user-select       : none;
+    -webkit-user-select   : none;
+    user-select           : none;
 }
 
 header {
-	position: relative;
-	top: 15%;
-	/* Left padding */
-	padding-left: 6.25rem;
-	/* This will make the header's width the width of its content */
-	display: inline-block;
+    display      : inline-block;
+    padding-left : 6.25rem;
+    position     : relative;
+    top          : 15%;
 }
 
 header h1 {
-	font-family: "Hubot Sans";
-	color: var(--text);
-	font-size: 6vw;
-	font-weight: 700;
-	line-height: 1;
-	text-transform: inherit;
-	width: 70%;
+    color          : var(--text);
+    font-family    : "Hubot Sans", sans-serif;
+    font-size      : 6vw;
+    font-weight    : 700;
+    line-height    : 1;
+    text-transform : inherit;
+    width          : 70%;
 }
 
 header span {
-	color: var(--accent);
+    color : var(--accent);
 }
 
 header p {
-	width: 55%;
-	color: var(--text);
-	margin-top: 1.5625rem;
-	margin-bottom: 1.5rem;
+    color         : var(--text);
+    margin-bottom : 1.5rem;
+    margin-top    : 1.5625rem;
+    width         : 55%;
 }
 
 header p a {
-	color: var(--accent);
+    color : var(--accent);
 }
 
 .card-box {
-	display: flex;
-	flex-wrap: wrap;
-	/* Align item to the middle of the flexbox */
-	justify-content: space-between;
-	/* Keep cards closer together */
-	padding: 0 5.25rem;
-	/* Move the content down so that it's below the heading */
-	margin-top: 1.75rem;
+    display         : flex;
+    /*
+    The flex-wrap property is used to define whether flex items are forced onto one line or can wrap onto multiple lines.
+    The wrap value is used to allow the items to wrap onto multiple lines.
+    */
+    flex-wrap       : wrap;
+    /*
+    The justify-content property is used to align flex items along the main axis of the current line of the flex container.
+    The space-between value is used to display the items with equal spacing between them.
+    */
+    justify-content : space-between;
+    margin-top      : 1.75rem;
+    padding         : 0 5.25rem;
 }
 
-/* The card-box leaves blank space to the right. This removes that issue */
 
 .card {
-	/* White background  */
-	background: var(--tertiary);
-	/* Rounded corners */
-	border-radius: 1em;
-	/* Small gap between the card and the content */
-	padding: 1.25rem;
-	padding-bottom: 0%;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	/* TODO: setting max-width with em feels clunky. Find a better way to do this */
-	max-width: 23em;
-	max-height: fit-content;
-	min-height: 38.5em;
-	margin-bottom: 2rem;
-	margin-left: auto;
-	margin-right: auto;
+    background    : var(--tertiary);
+    border-radius : 1em;
+    box-shadow    : 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom : 2rem;
+    margin-left   : auto;
+    margin-right  : auto;
+    max-height    : fit-content;
+    max-width     : 23em;
+    min-height    : 38.5em;
+    padding       : 1.25rem 1.25rem 0;
 }
 
-/* Make the cards all the same size, regardless of if they have content or not */
 
 .card p {
-	/* Make the text black */
-	color: var(--text-secondary);
-	/* Put the text in the middle of the card */
-	text-align: center;
-	/* Make th text take the entire width of the card */
-	width: 100%;
-	margin-bottom: 2.5rem;
+    color         : var(--text-secondary);
+    margin-bottom : 2.5rem;
+    text-align    : center;
+    width         : 100%;
 }
 
 .card h2 {
-	/* Make the text black */
-	color: var(--text-secondary);
-	/* Put the text in the middle of the card */
-	text-align: center;
-	/* Make the text take the entire width of the card */
-	width: 100%;
+    color      : var(--text-secondary);
+    text-align : center;
+    width      : 100%;
 }
 
 .card img {
-	/* Set the image to cover and keep them the same size*/
-	object-fit: cover;
-	width: 100%;
-	height: 60%;
-	max-width: fit-content;
-	/* Round the corner of the image */
-	border-radius: 1em;
-	/* Make the image a square */
-	aspect-ratio: 1/1;
-	/* Put the image in the middle of the card */
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	/* Put space below the image */
-	margin-bottom: 20px;
-	margin-bottom: 2rem;
+    aspect-ratio  : 1/1;
+    border-radius : 1em;
+    /*
+    The display property is used to define the type of box an element generates.
+    The block value is used to display the element as a block box.
+    */
+    display       : block;
+    height        : 60%;
+    margin-bottom : 2rem;
+    margin-left   : auto;
+    margin-right  : auto;
+    max-width     : fit-content;
+    /*We use the object-fit property to make sure the image is scaled to fit the container.*/
+    object-fit    : cover;
+    width         : 100%;
 }
 
-/* Styling for a form input field */
+/* The input class is used for the text-box input in a form */
 input {
-	border: none;
-	/* Round the border */
-	border-radius: 0.5rem;
-	border-bottom: 0.125rem solid var(--text-secondary);
-	padding: 0.5rem;
-	color: var(--text-secondary);
-	width: 100%;
-	display: block;
-	text-align: center;
-	margin-bottom: 1.25rem;
-	/* Remove the highlight when you click on it */
-	outline: none;
+    border        : none;
+    border-bottom : 0.125rem solid var(--text-secondary);
+    border-radius : 0.5rem;
+    color         : var(--text-secondary);
+    display       : block;
+    margin-bottom : 1.25rem;
+    outline       : none;
+    padding       : 0.5rem;
+    text-align    : center;
+    width         : 100%;
 }
 
 footer {
-	/* Put the footer at the bottom of the page */
-	position: relative;
-	bottom: 0;
-	/* Make the footer the same width as the page */
-	width: 100%;
-	/* Make the footer the same height as the nav bar */
-	height: 4rem;
-	/* Make the footer the same colour as the nav bar */
-	background: var(--primary);
+    background : var(--primary);
+    bottom     : 0;
+    height     : 4rem;
+    position   : relative;
+    width      : 100%;
 }
 
 footer p {
-	/* Make the text white */
-	color: var(--text);
-	/* Put the text in the middle of the footer */
-	text-align: center;
-	/* Put the text on a new line */
-	display: block;
-	margin-top: 1.25rem;
+    color      : var(--text);
+    display    : block;
+    margin-top : 1.25rem;
+    text-align : center;
 }
 
 footer p a {
-	/* Make the text white */
-	color: var(--text);
+    color : var(--text);
 }
 
 footer p a:hover {
-	/* On hover, make the text the accent colour */
-	color: var(--accent);
+    color : var(--accent);
 }
 
 footer p a:active {
-	/* On active, make the text the accent colour */
-	color: var(--accent);
+    color : var(--accent);
 }
 
-/* The media queries for mobile */
-@media only screen and (max-width: 800px) {
-	/* The nav bar */
-	nav {
-		/* Remove the nav bar's background */
-		background: none;
-	}
+/*
+The media query below is used to change the layout of the website when the screen size is less than 800px.
+This helps to make the website more responsive and easier to use on mobile devices.
+*/
+@media only screen and (max-width : 800px) {
 
-	nav ul {
-		/* Remove the nav bar's background */
-		background: none;
-	}
+    nav ul li a {
+        color     : var(--text);
+        font-size : 1.125rem;
+    }
 
-	nav ul li a {
-		/* Make the text white */
-		color: var(--text);
-		/* Make the text the same size as the desktop version */
-		font-size: 1.125rem;
-	}
+    nav ul li a:hover {
+        color : var(--accent);
+    }
 
-	nav ul li a:hover {
-		/* On hover, make the text the accent colour */
-		color: var(--accent);
-	}
+    nav ul li a:hover:after {
+        background-color : var(--accent);
+    }
 
-	nav ul li a:hover:after {
-		/* On hover, make the text the accent colour */
-		background-color: var(--accent);
-	}
+    header {
+        padding-left : 0;
+    }
 
-	/* The logo */
-	.logo {
-		/* Make the logo white */
-		filter: brightness(0) invert(1);
-	}
+    header h1 {
+        font-size : 4.5rem;
+    }
 
-	/* The header */
-	header {
-		/* Remove the left padding */
-		padding-left: 0;
-	}
+    header p {
+        font-size : 1.25rem;
+    }
 
-	header h1 {
-		/* Make the text the same size as the desktop version */
-		font-size: 4.5rem;
-	}
+    /* I removed the logo and nav buttons on mobile, as they took up valuable screen space without adding much value */
+    .logo,
+    nav .btn {
+        display : none;
+    }
 
-	header p {
-		/* Make the text the same size as the desktop version */
-		font-size: 1.25rem;
-	}
+    nav,
+    nav ul {
+        background-color : var(--accent);
+    }
 
-	.logo,
-	nav .btn {
-		display: none;
-	}
+    nav ul li a {
+        color : var(--text-secondary);
+    }
 
-	nav,
-	nav ul {
-		background-color: var(--accent);
-	}
+    nav ul li a.active {
+        color : var(--text-secondary);
+    }
 
-	nav ul li a {
-		color: var(--text-secondary);
-	}
+    /*
+    Mobile browsers still implement the hover pseudo-class
+    Instead of on hover though, it is triggered when the element is tapped
+    This is not the desired behaviour, so I override it here
+    */
+    nav ul li a:hover {
+        color : var(--text-secondary);
+    }
 
-	nav ul li a.active {
-		color: var(--text-secondary);
-	}
+    /*
+    As mobile doesn't properly support hover events, I was able to reuse the after pseudo-element to create a line under the active nav button.
+    This marks the current page the user is on.
+    */
+    nav ul li a.active::after {
+        background-color : var(--text-secondary);
+        bottom           : 0;
+        content          : "";
+        display          : block;
+        height           : 0.125rem;
+        position         : relative;
+        width            : 100%;
+    }
 
-	nav ul li a:hover {
-		color: var(--text-secondary);
-	}
+    /*
+    As mobile screens are rather small, I want to align my text to the center.
+    Otherwise it looks like the page doesn't render properly.
+    */
+    nav ul {
+        text-align : center;
+    }
 
-	/* Put a black line under the active link */
-	nav ul li a.active::after {
-		content: "";
-		display: block;
-		width: 100%;
-		height: 0.125rem;
-		background-color: var(--text-secondary);
+    nav ul,
+    header {
+        display        : flex;
+        /*
+        The flex-direction property is used to define the direction of the main axis of the flex container.
+        The column value is used to stack the items vertically.
+        */
+        flex-direction : column;
+        position       : relative;
+        width          : 100%;
+    }
 
-		/* On multiline text, this should be at the very bottom */
-		bottom: 0;
-		/* The line should be under the text */
-		position: relative;
-	}
+    .card-box {
+        margin  : 0;
+        padding : 0;
+    }
 
-	nav ul {
-		text-align: center;
-		transition: 0.3s;
-	}
-	nav ul,
-	header {
-		display: flex;
-		flex-direction: column;
-		position: relative;
-		width: 100%;
-	}
+    header {
+        align-items  : center;
+        padding-left : 0;
+        padding-top  : 2rem;
+        text-align   : center;
+        top          : 0;
+    }
 
-	.card-box {
-		padding: 0;
-		margin: 0;
-	}
+    header h1 {
+        font-size : 6vw;
+    }
 
-	header {
-		padding-top: 2rem;
-		padding-left: 0%;
-		text-align: center;
-		/* Align to the middle */
-		align-items: center;
-		top: 0;
-	}
+    footer {
+        padding : 0.5rem;
+    }
 
-	header h1 {
-		font-size: 6vw;
-	}
-
-	/* A small amount of padding for the footer */
-	footer {
-		padding: 0.5rem;
-	}
-
-	.btn:hover,
-	button:hover {
-		/* Do nothing on hover */
-		background: var(--accent);
-		border-color: var(--primary);
-		color: var(--primary);
-	}
+    .btn:hover,
+    button:hover {
+        background   : var(--accent);
+        border-color : var(--primary);
+        color        : var(--primary);
+    }
 }
