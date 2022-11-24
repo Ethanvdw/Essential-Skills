@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset = "UTF-8">
     <title>Personal Portfolio Website</title>
 
-    <link rel="stylesheet" href="/styles/stylesheet.css">
-    <link rel="icon" href="images/meta/mortarboard.png" type="image/x-icon">
+    <link href = "/styles/stylesheet.css" rel = "stylesheet">
+    <link href = "images/meta/mortarboard.png" rel = "icon" type = "image/x-icon">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta content = "width=device-width, initial-scale=1.0" name = "viewport">
     <!-- Preload my fonts reduce CLS (Cumulative layout shift) which will help keep the layout more constant as the site loads.-->
 
-    <link rel="preload" href="/fonts/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Hubot-Sans.woff2" as="font" type="font/woff2" crossorigin>
+    <link as = "font" crossorigin href = "/fonts/Mona-Sans.woff2" rel = "preload" type = "font/woff2">
+    <link as = "font" crossorigin href = "/fonts/Hubot-Sans.woff2" rel = "preload" type = "font/woff2">
 </head>
 <body>
-        <nav>
-            <img src=images/meta/keyboard.png alt="Keyboard logo" class="logo">
-            <ul>
-                <li><a class = "active" href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="cpd.html">Continued Professional Development</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-            <a href="mailto:N0990236@my.ntu.ac.uk" class="btn">Contact</a>
-        </nav>
+<nav>
+    <img alt = "Keyboard logo" class = "logo" src = "images/meta/keyboard.png">
+    <ul>
+        <li><a class = "active" href = "index.html">Home</a></li>
+        <li><a href = "about.html">About</a></li>
+        <li><a href = "cpd.html">Continued Professional Development</a></li>
+        <li><a href = "blog.html">Blog</a></li>
+    </ul>
+    <a class = "btn" href = "mailto:N0990236@my.ntu.ac.uk">Contact</a>
+</nav>
 
-        <header>
-            <h1>Hello World! I’m <span>Ethan</span></h1>
-            <p>I study M.Comp. (Hons) Computer Science at Nottingham Trent University.</p>
-            <p>Here you'll find a little bit <span><a href="about.html">about me</a></span> and where you can <span><a href="mailto:N0990236@my.ntu.ac.uk">get in contact</a></span></p>
-            <p>Do you use LinkedIn? If so, you can <span><a href="https://www.linkedin.com/in/ethan-van-der-westhuizen-751535221/">find me here</a></span></p>
-            <a href="downloads/Ethan van der Westhuizen CV.docx" class="btn">Download CV</a>
+<header>
+    <h1>Hello World! I’m <span>Ethan</span></h1>
+    <p>I study M.Comp. (Hons) Computer Science at Nottingham Trent University.</p>
+    <p>Here you'll find a little bit <span><a href = "about.html">about me</a></span> and where you can <span><a
+            href = "mailto:N0990236@my.ntu.ac.uk">get in contact</a></span></p>
+    <p>Do you use LinkedIn? If so, you can <span><a
+            href = "https://www.linkedin.com/in/ethan-van-der-westhuizen-751535221/">find me here</a></span></p>
+    <a class = "btn" href = "downloads/Ethan van der Westhuizen CV.docx">Download CV</a>
+</header>
 </body>
 </html>

@@ -34,7 +34,6 @@ Not all of these colours are used in this stylesheet, but I've included them to 
 :root {
     --accent         : #FDEB47;
     --primary        : #1D1D24;
-    --secondary      : #6171FF;
     --tertiary       : #FFFFFF;
     --text           : #FFFFFF;
     --text-secondary : #1D1D24;
@@ -50,22 +49,30 @@ Not all of these colours are used in this stylesheet, but I've included them to 
     font-family : "Mona Sans", sans-serif;
     margin      : 0;
     padding     : 0;
-
 }
 
 
 body {
-    background-image: url(/images/hero.jpg);
     background-attachment : fixed;
-    background-size  : cover;
-    height           : 100vh;
-    width            : 100%;
+    background-color      : var(--primary);
+    background-image      : url(/images/hero.jpg);
+    background-size       : cover;
+    height                : 100vh;
+    width                 : 100%;
 }
 
 
 a {
     /* Remove the underline from links*/
     text-decoration : none;
+}
+
+p, ul {
+    color : var(--text);
+}
+
+li {
+    list-style : disc;
 }
 
 nav {
@@ -290,10 +297,10 @@ input {
 
 footer {
     /* background : var(--primary); */
-    height     : auto;
-    width      : 100%;
-    bottom     : 0;
-    position   : relative;
+    bottom   : 0;
+    height   : auto;
+    position : relative;
+    width    : 100%;
 }
 
 footer p {
@@ -320,9 +327,10 @@ The media query below is used to change the layout of the website when the scree
 This helps to make the website more responsive and easier to use on mobile devices.
 */
 @media only screen and (max-width : 800px) {
-    .hero{
-        background-image: none;
+    .hero {
+        background-image : none;
     }
+
     nav ul li a {
         color     : var(--text);
         font-size : 1.125rem;
